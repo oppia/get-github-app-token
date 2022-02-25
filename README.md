@@ -49,14 +49,13 @@ repository. Then download its private key and save the file as
 content:
 
 ```js
-import { promises as fs } from 'fs';
-
-import { getToken } from './utils.js';
+const fs = require('fs');
+const utils = require('./utils');
 
 async function main() {
-  const privateKey = (await fs.readFile('privateKey.pem')).toString();
+  const privateKey = (await fs.promises.readFile('privateKey.pem')).toString();
 
-  const token = await getToken(
+  const token = await utils.getToken(
     '<YOUR APP ID>',
     privateKey,
     '<YOUR USER NAME>/<YOUR REPOSITORY NAME>');
