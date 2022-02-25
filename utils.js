@@ -1,5 +1,16 @@
 import { App } from '@octokit/app'
 
+/**
+ * Retrieve an authentication token for a GitHub App.
+ *
+ * @param {string} appId - The GitHub App's ID, which you can retrieve
+ * from your app's settings page.
+ * @param {string} privateKey - The GitHub App's private key, which you
+ * can download from GitHub. This argument should be a string of the
+ * file contents. Note that GitHub should generate a PEM file for you.
+ * @param {string} repository - The repository owner and name, separated
+ * by a slash. For example: "user/repository".
+ */
 async function getToken(appId, privateKey, repository) {
   const app = new App({
     appId: appId,
