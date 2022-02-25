@@ -61,7 +61,8 @@ yarn dist
 git -C dist/ init
 git -C dist/ add -A
 git -C dist/ commit -m "Release version v$version"
-git -C dist/ checkout -b "v$version"
-git -C dist/ push -f "$RELEASE_REMOTE" "v$version"
+branch="release-v$version"
+git -C dist/ checkout -b "$branch"
+git -C dist/ push -f "$RELEASE_REMOTE" "$branch"
 
-echo "Version v$version has been tagged and pushed to branch v$version"
+echo "Version v$version has been tagged and pushed to branch $branch"
