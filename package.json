@@ -4,7 +4,7 @@
   "description": "GitHub Action to retrieve an authentication token for a GitHub App",
   "main": "index.js",
   "scripts": {
-    "dist": "yarn ncc build index.js --license licenses.txt"
+    "dist": "yarn ncc build -o dist index.js --license licenses.txt && cp action.yml dist/"
   },
   "repository": "https://github.com/U8NWXD/get-github-app-token.git",
   "author": "U8NWXD",
