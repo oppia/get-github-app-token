@@ -30,7 +30,7 @@ You can use this action in a GitHub Actions workflow like this:
 ```yml
   - name: Retrieve token
     id: get-token
-    uses: U8NWXD/get-github-app-token
+    uses: U8NWXD/get-github-app-token@release-v0.0.1
     with:
       app_id: ${{ secrets.APP_ID }}
       private_key: ${{ secrets.APP_PRIVATE_KEY }}
@@ -41,7 +41,29 @@ You can use this action in a GitHub Actions workflow like this:
       token: ${{ steps.get-token.outputs.token }}
 ```
 
-## Demo
+**Note that you MUST specify a release branch after `@` on the `uses:`
+line. The `main` branch does not contain the bundled distribution files
+that GitHub Actions
+[requires](https://docs.github.com/en/actions/creating-actions/creating-a-javascript-action#commit-tag-and-push-your-action-to-github).
+Tags like `v0.0.1` live on the `main` branch and so also lack the
+bundled distribution files. These files are only present on the release
+branches.**
+
+Because we rely on release branches to keep the distribution files out
+of the `main` branch, you cannot specify major or major-minor version
+numbers (e.g. `v1` or `v1.1`). Instead, you must specify a full version
+number (e.g. `v1.0.1`) as part of the release branch name (e.g.
+`release-v1.0.1`). Alternatively, you can specify a commit hash.
+
+
+## Developing
+
+### Set Up
+
+Setting up the project is as easy as running `yarn install` to install
+the dependencies.
+
+### Demo
 
 To test out this GitHub Action, create a GitHub app and install it on a
 repository. Then download its private key and save the file as
@@ -67,3 +89,31 @@ main();
 
 Then when you run `node demo.js` you should see a token printed that
 starts with `ghs_`.
+
+### Create a New Release
+
+To create a new release, you need to first:
+
+* Make sure you have all your changes in the `main` branch. This
+  includes updates to the version number in `package.json`.
+* Pick a version number. We follow semantic versioning.
+* Checkout the `main` branch and run the release script with your
+  version number (in this example `v0.0.1`):
+
+  ```console
+  $ ./release.sh 0.0.1
+  ...
+  ```
+
+The `release.sh` script takes care of everything else for you. It:
+
+* Runs some simple checks to make sure you remembered to update the
+  `package.json` version and that you have a clean working directory.
+* Creates a new version tag on `main` and pushes it.
+* Creates a new distribution with `yarn dist`. This command creates a
+  bundled `dist/index.json` file with all the dependencies, and it
+  copies over `action.yml` into `dist/`.
+* Creates a new git repository in `dist` and pushes the contents to the
+  release branch. Note that this means that we do not expect to track
+  commit history on the release branches. Each branch will have just one
+  commit with the distribution files.
