@@ -1,6 +1,5 @@
-import * as core from '@actions/core';
-
-import { getToken } from 'utils.js';
+const core = require('@actions/core');
+const utils = require('./utils');
 
 async function main() {
   try {
@@ -8,7 +7,7 @@ async function main() {
     privateKey = core.getInput('private_key');
     repository = process.env.GITHUB_REPOSITORY;
 
-    const token = getToken(appId, privateKey, repository);
+    const token = utils.getToken(appId, privateKey, repository);
     core.setSecret(token);
     core.setOutput('token', token);
   } catch (error) {

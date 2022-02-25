@@ -1,4 +1,4 @@
-import { App } from '@octokit/app'
+const octokitApp = require('@octokit/app');
 
 /**
  * Retrieve an authentication token for a GitHub App.
@@ -12,7 +12,7 @@ import { App } from '@octokit/app'
  * by a slash. For example: "user/repository".
  */
 async function getToken(appId, privateKey, repository) {
-  const app = new App({
+  const app = new octokitApp.App({
     appId: appId,
     privateKey: privateKey,
   });
@@ -33,4 +33,4 @@ async function getToken(appId, privateKey, repository) {
   return resp.token;
 }
 
-export { getToken };
+module.exports = { getToken };
