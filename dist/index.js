@@ -17049,7 +17049,7 @@ async function main() {
     privateKey = core.getInput('private_key');
     repository = process.env.GITHUB_REPOSITORY;
 
-    const token = utils.getToken(appId, privateKey, repository);
+    const token = await utils.getToken(appId, privateKey, repository);
     core.setSecret(token);
     core.setOutput('token', token);
   } catch (error) {
