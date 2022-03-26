@@ -30,7 +30,7 @@ You can use this action in a GitHub Actions workflow like this:
 ```yml
   - name: Retrieve token
     id: get-token
-    uses: U8NWXD/get-github-app-token@release-v0.0.1
+    uses: oppia/get-github-app-token@release-v0.0.1
     with:
       app_id: ${{ secrets.APP_ID }}
       private_key: ${{ secrets.APP_PRIVATE_KEY }}
