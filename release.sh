@@ -1,4 +1,4 @@
-# Copyright 2022 U8NWXD
+# Copyright 2022 The Oppia Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 
 set -e
 
-RELEASE_REMOTE="git@github.com:U8NWXD/get-github-app-token"
+RELEASE_REMOTE="git@github.com:oppia/get-github-app-token"
 
 version="$1"
 

@@ -6,8 +6,11 @@
   "scripts": {
     "dist": "yarn ncc build -o dist index.js --license licenses.txt && cp action.yml dist/"
   },
-  "repository": "https://github.com/U8NWXD/get-github-app-token.git",
-  "author": "U8NWXD",
+  "repository": {
+      "type": "git",
+      "url": "git+https://github.com/oppia/get-github-app-token.git"
+  },
+  "author": "",
   "license": "Apache-2.0",
   "dependencies": {
     "@actions/core": "^1.6.0",
